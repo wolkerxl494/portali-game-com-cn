@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱游戏 · 知识库入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #fafaf9;
+            color: #1e1e1e;
+            line-height: 1.7;
+            padding: 2.5rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .page {
+            max-width: 760px;
+            width: 100%;
+        }
+        /* 标题层 */
+        .site-badge {
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            color: #7c7c7b;
+            border-bottom: 1px solid #e3e2e0;
+            padding-bottom: 0.75rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .site-badge span {
+            background: #eae8e5;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            color: #4f4e4b;
+        }
+        h1 {
+            font-weight: 530;
+            font-size: 2.2rem;
+            letter-spacing: -0.02em;
+            margin: 0 0 0.25rem 0;
+            line-height: 1.2;
+            color: #1a1a18;
+        }
+        .subhead {
+            font-size: 1rem;
+            color: #6b6a66;
+            margin-bottom: 2.7rem;
+            border-left: 3px solid #cbc9c3;
+            padding-left: 1.2rem;
+        }
+        h2 {
+            font-weight: 510;
+            font-size: 1.3rem;
+            margin: 2.8rem 0 0.8rem 0;
+            letter-spacing: -0.01em;
+            color: #232320;
+            border-bottom: 1px solid #dad7d2;
+            padding-bottom: 0.3rem;
+        }
+        h3 {
+            font-weight: 480;
+            font-size: 1.05rem;
+            margin: 1.8rem 0 0.4rem 0;
+            color: #2b2a27;
+        }
+        p {
+            margin: 0 0 1.2rem 0;
+            color: #2d2c28;
+        }
+        a {
+            color: #17645e;
+            text-decoration: none;
+            border-bottom: 1px dotted #b6cdca;
+            transition: border-color 0.15s;
+        }
+        a:hover {
+            border-bottom: 1px solid #17645e;
+        }
+        /* 卡片式陈列——目录感 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0 2rem 0;
+        }
+        .card-item {
+            background: #ffffff;
+            border: 1px solid #e6e3df;
+            border-radius: 16px;
+            padding: 1.2rem 1rem 1rem 1rem;
+            transition: box-shadow 0.2s;
+        }
+        .card-item:hover {
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03), 0 0 0 1px #d4cfc7;
+        }
+        .card-item .card-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #8b8982;
+            margin-bottom: 0.35rem;
+        }
+        .card-item .card-title {
+            font-weight: 500;
+            font-size: 1rem;
+            color: #1f1f1b;
+            margin-bottom: 0.25rem;
+        }
+        .card-item .card-desc {
+            font-size: 0.85rem;
+            color: #5e5d58;
+            line-height: 1.5;
+        }
+        /* 提示块 */
+        .note-box {
+            background: #f3f1ed;
+            border-radius: 20px;
+            padding: 1.6rem 1.8rem;
+            margin: 2rem 0 2.2rem 0;
+            border-left: 4px solid #c1bcb2;
+        }
+        .note-box p {
+            margin-bottom: 0.5rem;
+            font-size: 0.94rem;
+        }
+        .note-box p:last-child {
+            margin-bottom: 0;
+        }
+        .note-box .note-label {
+            font-weight: 500;
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+            color: #5f5d55;
+            text-transform: uppercase;
+            margin-bottom: 0.7rem;
+        }
+        .faq-compact {
+            margin: 2rem 0 1.5rem 0;
+        }
+        .faq-item {
+            padding: 0.9rem 0;
+            border-bottom: 1px solid #e4e1db;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-q {
+            font-weight: 490;
+            font-size: 0.96rem;
+            color: #1d1d18;
+            margin-bottom: 0.2rem;
+        }
+        .faq-a {
+            font-size: 0.9rem;
+            color: #56544e;
+            line-height: 1.6;
+        }
+        .footer-note {
+            margin-top: 3.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e3dfd8;
+            font-size: 0.8rem;
+            color: #7a7870;
+            text-align: left;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #eae7e1;
+            margin: 2rem 0;
+        }
+        /* 响应式微调 */
+        @media (max-width: 480px) {
+            body { padding: 1.6rem 1rem; }
+            h1 { font-size: 1.7rem; }
+            .card-grid { grid-template-columns: 1fr; }
+            .note-box { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <div class="site-badge">
+        <span>知识库 · 对照入口</span>
+        <span>版本索引 2025</span>
+    </div>
+
+    <h1>爱游戏 · 查询与延伸</h1>
+    <div class="subhead">
+        从日常检索、目录对照到衍生阅读，聚合围绕 <a href="https://portali-game.com.cn">爱游戏</a> 的结构化信息节点。
+    </div>
+
+    <!-- 目录感卡片区：四个知识模块 -->
+    <div class="card-grid">
+        <div class="card-item">
+            <div class="card-label">· 分类索引</div>
+            <div class="card-title">类型 · 标签</div>
+            <div class="card-desc">按玩法、题材、年代筛选，建立快速定位坐标系。</div>
+        </div>
+        <div class="card-item">
+            <div class="card-label">· 对照表</div>
+            <div class="card-title">版本 · 平台</div>
+            <div class="card-desc">多版本参数并列，便于横向对比与选择。</div>
+        </div>
+        <div class="card-item">
+            <div class="card-label">· 术语注释</div>
+            <div class="card-title">机制 · 用语</div>
+            <div class="card-desc">社区常用术语、缩写与引用来源说明。</div>
+        </div>
+        <div class="card-item">
+            <div class="card-label">· 延伸阅读</div>
+            <div class="card-title">参考 · 周边</div>
+            <div class="card-desc">设计访谈、数值拆解、文化考据等扩展材料。</div>
+        </div>
+    </div>
+
+    <h2>日常查询场景</h2>
+    <p>当需要核实某款作品的系统机制、确认更新履历，或检索特定tag下的作品清单时，可直接利用上方分类模块进入对应分区。每个分区均保持统一的条目结构：标题、摘要、关联链接与更新时间戳。这种布局降低反复跳转的成本，也让信息对照更加直观。</p>
+    <p>例如在「版本 · 平台」对照表中，同一作品的不同发行版本会按行并置，补丁号、语言支持、分辨率上限并列显示，方便一眼定位差异。</p>
+
+    <h2>提示区 · 使用建议</h2>
+    <div class="note-box">
+        <div class="note-label">📋 查阅指引</div>
+        <p>• 优先使用「分类索引」定位大方向，再通过「对照表」缩小范围。</p>
+        <p>• 术语注释包含社区惯用简称与正式译名对照，遇到陌生缩写时可先在此区检索。</p>
+        <p>• 延伸阅读中的材料多来自公开访谈、版本更新日志与玩家社群分析，可作为深入了解的起点。</p>
+        <p>• 所有链接均指向 <a href="https://portali-game.com.cn">爱游戏</a> 站点内部页面，外部引用会额外标注来源。</p>
+    </div>
+
+    <h2>相关信息区 · 常见问题摘要</h2>
+    <div class="faq-compact">
+        <div class="faq-item">
+            <div class="faq-q">如何快速找到某款作品的系统需求对照？</div>
+            <div class="faq-a">在「版本 · 平台」分区使用搜索或按字母索引，表格中会列出最低与推荐配置、API版本以及存储空间要求。移动端与主机版参数单独列出。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">术语注释是否包含非官方译名？</div>
+            <div class="faq-a">会同时收录官方译名与社区常用称谓，并在条目中标注来源语境（如繁体区用语、速通社区惯用语）。若存在歧义，以 <a href="https://portali-game.com.cn">爱游戏</a> 词条主名为准。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">延伸阅读的材料更新频率怎样？</div>
+            <div class="faq-a">随作品版本更新、赛事或纪念日等节点持续补充。每个条目会记录最近一次复核日期。部分深度分析文章会保留原始出处链接。</div>
+        </div>
+    </div>
+
+    <hr>
+
+    <p style="font-size:0.9rem; color:#4f4d46;">本页作为知识库的入口，围绕 <a href="https://portali-game.com.cn">爱游戏</a> 整理分类索引、对照表、术语注释与延伸阅读四个模块，供日常检索与对照参考。内容保持中立，所有信息均来自已公开的可靠来源或经核对的社区资料。</p>
+
+    <div class="footer-note">
+        <span>页面结构 · 目录感布局 v1.0</span>
+    </div>
+
+</div>
+</body>
+</html>

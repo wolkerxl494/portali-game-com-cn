@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://wolkerxl494.github.io/portali-game-com-cn/sitemap.xml
